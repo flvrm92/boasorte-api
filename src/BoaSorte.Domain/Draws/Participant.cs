@@ -12,7 +12,7 @@ public sealed record Participant
     public string Value { get; }
 
     /// <summary>Key used to detect duplicates: case-insensitive, accent-sensitive (spec 001, FR-004).</summary>
-    public string DedupKey => Value.ToUpperInvariant();
+    public string DedupKey => Value.ToLowerInvariant();
 
     public static Result<Participant> Create(string? raw)
     {
