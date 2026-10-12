@@ -8,6 +8,8 @@ public static class DependencyInjection
     {
         services.AddSingleton(TimeProvider.System);
 
+        // Use case handlers are registered together with their adapters and endpoints (001, Fase 3 / T033).
+
         return services;
     }
 }

@@ -9,5 +9,12 @@ public sealed class BoaSorteApiFactory(string connectionString) : WebApplication
     {
         builder.UseEnvironment("Testing");
         builder.UseSetting("ConnectionStrings:Default", connectionString);
+
+        // Same container validation as Development, so a missing registration fails here and not at startup.
+        builder.UseDefaultServiceProvider(options =>
+        {
+            options.ValidateOnBuild = true;
+            options.ValidateScopes = true;
+        });
     }
 }
