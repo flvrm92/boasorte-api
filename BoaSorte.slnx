@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BoaSorte.Domain/BoaSorte.Domain.csproj" />
+    <Project Path="src/BoaSorte.Application/BoaSorte.Application.csproj" />
+    <Project Path="src/BoaSorte.Infrastructure/BoaSorte.Infrastructure.csproj" />
+    <Project Path="src/BoaSorte.Api/BoaSorte.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/BoaSorte.Domain.Tests/BoaSorte.Domain.Tests.csproj" />
+    <Project Path="tests/BoaSorte.Application.Tests/BoaSorte.Application.Tests.csproj" />
+    <Project Path="tests/BoaSorte.Api.IntegrationTests/BoaSorte.Api.IntegrationTests.csproj" />
+    <Project Path="tests/BoaSorte.Architecture.Tests/BoaSorte.Architecture.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="Dockerfile" />
+  </Folder>
+</Solution>
