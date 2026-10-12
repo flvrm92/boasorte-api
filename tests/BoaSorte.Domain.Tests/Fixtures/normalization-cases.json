@@ -1,0 +1,106 @@
+{
+  "$comment": "Casos compartilhados entre os testes do client (Vitest) e da API (xUnit). Regras: plan.md > Regras de domínio.",
+  "cases": [
+    {
+      "name": "trim e linhas vazias",
+      "input": [
+        "  Ana  ",
+        "",
+        "   ",
+        "Bruno"
+      ],
+      "removeDuplicates": false,
+      "expected": [
+        "Ana",
+        "Bruno"
+      ]
+    },
+    {
+      "name": "duplicados mantidos quando a opção está desligada",
+      "input": [
+        "Ana",
+        "ana",
+        "Ana"
+      ],
+      "removeDuplicates": false,
+      "expected": [
+        "Ana",
+        "ana",
+        "Ana"
+      ]
+    },
+    {
+      "name": "dedup sem diferenciar caixa nem espaços nas pontas, mantendo a primeira grafia",
+      "input": [
+        "ana ",
+        "Ana",
+        "ANA",
+        "Bruno"
+      ],
+      "removeDuplicates": true,
+      "expected": [
+        "ana",
+        "Bruno"
+      ]
+    },
+    {
+      "name": "acentos não são equivalentes (só caixa e espaços)",
+      "input": [
+        "José",
+        "Jose"
+      ],
+      "removeDuplicates": true,
+      "expected": [
+        "José",
+        "Jose"
+      ]
+    },
+    {
+      "name": "espaços internos preservados",
+      "input": [
+        "Maria  Clara",
+        "Maria Clara"
+      ],
+      "removeDuplicates": true,
+      "expected": [
+        "Maria  Clara",
+        "Maria Clara"
+      ]
+    },
+    {
+      "name": "ß e ẞ equivalem (minúsculas), mas não a SS",
+      "input": [
+        "Straße",
+        "STRASSE",
+        "STRAẞE"
+      ],
+      "removeDuplicates": true,
+      "expected": [
+        "Straße",
+        "STRASSE"
+      ]
+    },
+    {
+      "name": "números como texto",
+      "input": [
+        "007",
+        "7",
+        " 7 "
+      ],
+      "removeDuplicates": true,
+      "expected": [
+        "007",
+        "7"
+      ]
+    },
+    {
+      "name": "tudo vazio",
+      "input": [
+        "",
+        "  "
+      ],
+      "removeDuplicates": true,
+      "expected": []
+    }
+  ]
+}
