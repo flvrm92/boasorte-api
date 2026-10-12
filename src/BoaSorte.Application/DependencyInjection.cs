@@ -1,3 +1,6 @@
+using BoaSorte.Application.Draws.CreateDraw;
+using BoaSorte.Application.Draws.GetDraw;
+using BoaSorte.Application.Draws.PurgeExpiredDraws;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BoaSorte.Application;
@@ -8,7 +11,9 @@ public static class DependencyInjection
     {
         services.AddSingleton(TimeProvider.System);
 
-        // Use case handlers are registered together with their adapters and endpoints (001, Fase 3 / T033).
+        services.AddScoped<CreateDrawHandler>();
+        services.AddScoped<GetDrawHandler>();
+        services.AddScoped<PurgeExpiredDrawsHandler>();
 
         return services;
     }

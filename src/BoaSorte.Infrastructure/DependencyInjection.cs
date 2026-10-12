@@ -1,4 +1,8 @@
+using BoaSorte.Application.Abstractions;
+using BoaSorte.Domain.Common;
+using BoaSorte.Infrastructure.Jobs;
 using BoaSorte.Infrastructure.Persistence;
+using BoaSorte.Infrastructure.Randomness;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,9 +23,26 @@ public static class DependencyInjection
             .UseNpgsql(connectionString)
             .UseSnakeCaseNamingConvention());
 
+        services.AddScoped<IDrawRepository, DrawRepository>();
+        services.AddSingleton<IRandomSource, CryptoRandomSource>();
+
+        services.Configure<PurgeOptions>(configuration.GetSection("Purge"));
+        services.AddHostedService<ExpiredDrawsPurgeJob>();
+
         services.AddHealthChecks()
             .AddDbContextCheck<AppDbContext>("database");
 
         return services;
+    }
+
+    /// <summary>
+    /// Applies pending migrations (plan: single instance on the VPS). Migrations must stay backward compatible,
+    /// because during a rolling update the previous version briefly runs against the new schema.
+    /// </summary>
+    public static async Task MigrateDatabaseAsync(this IServiceProvider services, CancellationToken cancellationToken = default)
+    {
+        await using var scope = services.CreateAsyncScope();
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        await db.Database.MigrateAsync(cancellationToken).ConfigureAwait(false);
     }
 }

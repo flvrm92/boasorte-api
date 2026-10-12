@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <IsPackable>false</IsPackable>
-    <!-- Test method names use underscores (Given_When_Then). -->
-    <NoWarn>$(NoWarn);CA1707</NoWarn>
+    <!-- CA1707: test names use underscores. CA1861: literal arrays in tests are clearer than static fields. -->
+    <NoWarn>$(NoWarn);CA1707;CA1861</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit.v3" />
