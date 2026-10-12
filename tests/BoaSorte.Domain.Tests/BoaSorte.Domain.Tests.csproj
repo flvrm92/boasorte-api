@@ -2,4 +2,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BoaSorte.Domain\BoaSorte.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- Copy of boasorte-app/specs/001-sorteio-lista/contracts/normalization-cases.json (see NormalizationCasesTests). -->
+    <None Update="Fixtures\normalization-cases.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>
